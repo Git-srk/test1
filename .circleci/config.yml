@@ -20,9 +20,12 @@ jobs:
       # Replace this with steps to build a package, or executable
       - run:
           name: Build an artifact
-          command: touch example.txt
+          command: pwd
+          command: ls -a > example.txt
       - store_artifacts:
           path: example.txt
+          destination: exam.txt
+      
   deploy:
     docker:
       - image: cimg/base:stable
@@ -32,7 +35,7 @@ jobs:
           name: deploy
           command: '#e.g. ./deploy.sh'
 workflows:
-  example:
+  flow1:
     jobs:
       - test
       - build:
@@ -41,3 +44,4 @@ workflows:
       - deploy:
           requires:
             - test
+            - build
